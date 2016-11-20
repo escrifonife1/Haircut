@@ -22,5 +22,10 @@ namespace Haircut.Android
 
 			SetContentView(Resource.Layout.Login);
 		}
-	}
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+    }
 }
