@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Haircut.Core.Repository
+namespace Haircut.Core
 {
-    public class LoginRepository
+    class Class1
     {
     }
 }
