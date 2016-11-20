@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Haircut.Core.Models
+namespace Haircut.Model.Models
 {
     public class Login
     {

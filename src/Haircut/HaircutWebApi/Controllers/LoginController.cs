@@ -1,4 +1,4 @@
-﻿using Haircut.Core.Models;
+﻿using Haircut.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

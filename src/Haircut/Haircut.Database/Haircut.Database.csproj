@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{864F05EE-EA50-4C33-9A7A-D27C6BF16DA7}</ProjectGuid>
+    <ProjectGuid>{F646F4E2-879C-449D-9CE2-598515C07B58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Haircut.Core</RootNamespace>
-    <AssemblyName>Haircut.Core</AssemblyName>
+    <RootNamespace>Haircut.Database</RootNamespace>
+    <AssemblyName>Haircut.Database</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,16 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\LoginRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Haircut.Model\Haircut.Model.csproj">
-      <Project>{8cc8fc8f-6f66-46e8-8755-4f91a1bfee4b}</Project>
-      <Name>Haircut.Model</Name>
+    <ProjectReference Include="..\Haircut.Core\Haircut.Core.csproj">
+      <Project>{864f05ee-ea50-4c33-9a7a-d27c6bf16da7}</Project>
+      <Name>Haircut.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configuration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
