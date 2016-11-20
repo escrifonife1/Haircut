@@ -3,6 +3,8 @@ using Haircut.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
@@ -20,21 +22,25 @@ namespace HaircutWebApi.Controllers
         }
 
         [HttpGet]
-        public Login Get(int id)
+        public IHttpActionResult Get(int id)
         {
+            Login login;
+
             try
             {
-                return _loginRepository.GetById(id);
+                login = _loginRepository.GetById(id);
             }
             catch(Exception ex)
             {
-                return new Login()
+                login = new Login()
                 {
                     Id = 99,
                     UserName = ex.ToString(),
                     Password = "Error"
                 };
             }
+
+            return Ok(login);
 
         }
     }
