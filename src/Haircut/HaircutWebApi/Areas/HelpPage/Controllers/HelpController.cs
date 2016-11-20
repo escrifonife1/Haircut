@@ -11,12 +11,7 @@ namespace HaircutWebApi.Areas.HelpPage.Controllers
     /// </summary>
     public class HelpController : Controller
     {
-        private const string ErrorViewName = "Error";
-
-        public HelpController()
-            : this(GlobalConfiguration.Configuration)
-        {
-        }
+        private const string ErrorViewName = "Error";               
 
         public HelpController(HttpConfiguration config)
         {

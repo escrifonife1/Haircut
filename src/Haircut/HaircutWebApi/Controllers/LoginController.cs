@@ -1,4 +1,5 @@
-﻿using Haircut.Model.Models;
+﻿using Haircut.Database.Contract;
+using Haircut.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,30 @@ namespace HaircutWebApi.Controllers
 {
     public class LoginController : ApiController
     {
-        [HttpGet]
-        public Login Logar([FromBody] Login login)
+        private ILoginRepository _loginRepository;
+                
+        public LoginController(ILoginRepository loginRepository)
         {
-            return login;
+            _loginRepository = loginRepository;
+        }
+
+        [HttpGet]
+        public Login Logar(int id)
+        {
+            try
+            {
+                return _loginRepository.GetById(id);
+            }
+            catch(Exception ex)
+            {
+                return new Login()
+                {
+                    Id = 99,
+                    UserName = ex.ToString(),
+                    Password = "Error"
+                };
+            }
+
         }
     }
 }

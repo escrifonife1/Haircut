@@ -1,4 +1,5 @@
-﻿using Haircut.Model.Models;
+﻿using Haircut.Database.Contract;
+using Haircut.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Repository
 {
-    public class LoginRepository : BaseRepository<Login>
+    public class LoginRepository : BaseRepository<Login>, ILoginRepository
     {
         public Login GetById(int id)
         {

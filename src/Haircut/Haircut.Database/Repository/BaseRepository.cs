@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Haircut.Database.Contract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Repository
 {
-    public abstract class BaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T>
     {
         protected DatabaseContext _context;
 
@@ -15,14 +16,15 @@ namespace Haircut.Database.Repository
             _context = new DatabaseContext();
         }
 
-        public virtual void Add(T entity)
-        {
-            _context.Set<T>().Add(entity);
+        public virtual void Add(T entity) 
+        {       
+                 
+            _context.Set(typeof(T)).Add(entity);
         }
 
         public virtual void Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            _context.Set(typeof(T)).Remove(entity);
         }
 
         public virtual void Save()
