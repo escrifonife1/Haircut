@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:paddingTop="10dp">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -22,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:hint="Digite o usuário"
-            android:id="@+id/editText1" />
+            android:id="@+id/editText_userName" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -41,11 +42,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:hint="Digite a senha"
-            android:id="@+id/editText2" />
+            android:id="@+id/editText_passWorl" />
     </LinearLayout>
     <Button
-        android:text="Button"
+        android:text="Confirmar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        android:id="@+id/button_confirm" />
 </LinearLayout>

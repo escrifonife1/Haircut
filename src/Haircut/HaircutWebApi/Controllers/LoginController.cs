@@ -21,14 +21,14 @@ namespace HaircutWebApi.Controllers
             _loginRepository = loginRepository;
         }
 
-        [HttpGet]
-        public IHttpActionResult Get(int id)
+        [HttpPost]
+        public IHttpActionResult Get([FromBody] Login lo)
         {
             Login login;
 
             try
             {
-                login = _loginRepository.GetById(id);
+                login = _loginRepository.GetByLogin(lo);
             }
             catch(Exception ex)
             {

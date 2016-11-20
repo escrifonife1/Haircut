@@ -61,16 +61,16 @@ namespace Haircut.Android
 		{
 			
 			// aapt resource value: 0x7f050006
-			public const int button1 = 2131034118;
+			public const int button_confirm = 2131034118;
 			
 			// aapt resource value: 0x7f050007
 			public const int button_test = 2131034119;
 			
-			// aapt resource value: 0x7f050002
-			public const int editText1 = 2131034114;
-			
 			// aapt resource value: 0x7f050005
-			public const int editText2 = 2131034117;
+			public const int editText_passWorl = 2131034117;
+			
+			// aapt resource value: 0x7f050002
+			public const int editText_userName = 2131034114;
 			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;

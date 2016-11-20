@@ -10,5 +10,6 @@ namespace Haircut.Database.Contract
     public interface ILoginRepository : IBaseRepository<Login>
     {
         Login GetById(int id);
+        Login GetByLogin(Login login);
     }
 }

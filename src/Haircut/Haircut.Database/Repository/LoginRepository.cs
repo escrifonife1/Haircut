@@ -16,5 +16,12 @@ namespace Haircut.Database.Repository
 
             return login;
         }
+
+        public Login GetByLogin(Login login)
+        {
+            var lo = _context.Login.Where(l => l.UserName == login.UserName && l.Password == login.Password).FirstOrDefault();
+
+            return lo;
+        }
     }
 }

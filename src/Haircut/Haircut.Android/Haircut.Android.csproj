@@ -18,7 +18,8 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <AndroidTlsProvider></AndroidTlsProvider>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,8 +80,16 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\Activitys\" />
+    <ProjectReference Include="..\Haircut.Core\Haircut.Core.csproj">
+      <Project>{864F05EE-EA50-4C33-9A7A-D27C6BF16DA7}</Project>
+      <Name>Haircut.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Haircut.Model\Haircut.Model.csproj">
+      <Project>{8cc8fc8f-6f66-46e8-8755-4f91a1bfee4b}</Project>
+      <Name>Haircut.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
