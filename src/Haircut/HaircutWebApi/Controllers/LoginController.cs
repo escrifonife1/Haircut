@@ -12,14 +12,15 @@ namespace HaircutWebApi.Controllers
     public class LoginController : ApiController
     {
         private ILoginRepository _loginRepository;
-                
+        
+           
         public LoginController(ILoginRepository loginRepository)
         {
             _loginRepository = loginRepository;
         }
 
         [HttpGet]
-        public Login Logar(int id)
+        public Login Get(int id)
         {
             try
             {
