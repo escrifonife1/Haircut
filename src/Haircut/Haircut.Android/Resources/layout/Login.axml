@@ -42,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:hint="Digite a senha"
-            android:id="@+id/editText_passWorl" />
+            android:id="@+id/editText_passWorl"
+            android:password="true" />
     </LinearLayout>
     <Button
         android:text="Confirmar"

@@ -1,4 +1,5 @@
-﻿using Haircut.Model.Models;
+﻿using Haircut.Core.Contract;
+using Haircut.Model.Models;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Services
 {
-    public class LoginService : BaseService
+    public class LoginService : BaseService, ILoginService
     {
         public Login Log(Login login)
         {

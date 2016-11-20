@@ -12,6 +12,8 @@ using Android.Views;
 using Android.Widget;
 using Haircut.Core.Services;
 using Haircut.Model.Models;
+using Haircut.Android.Resources.Factory;
+using Haircut.Core.Contract;
 
 namespace Haircut.Android
 {
@@ -30,17 +32,25 @@ namespace Haircut.Android
 
             button_confirm.Click += (s, e) =>
             {
-                var loginService = new LoginService();
+                var loginService = ManagerFactory.GetInstance<ILoginService>();
+
                 var login = loginService.Log(new Login()
                 {
                     UserName = editText_userName.Text,
                     Password = editText_passWord.Text
                 });
 
-                if(login != null)
+                Toast toast;
+                if(login?.Id > 0)
                 {
-
+                    toast = Toast.MakeText(this, "Correto", ToastLength.Long);
                 }
+                else
+                {
+                    toast = Toast.MakeText(this, "Usuário ou senha incorreto!", ToastLength.Long);
+                }
+
+                toast.Show();
             };
 		}
     }

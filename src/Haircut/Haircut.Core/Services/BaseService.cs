@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Services
 {
-    public class BaseService
+    public abstract class BaseService
     {
         string baseUrl = "http://tiagopascal-001-site1.gtempurl.com/HaircutApi/api/";
         protected RestClient _client;
