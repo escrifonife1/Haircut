@@ -9,6 +9,6 @@ namespace Haircut.Core.Contract
 {
     public interface ILoginService
     {
-        Login Log(Login login);
+        Task<Login> Log(Login login);
     }
 }

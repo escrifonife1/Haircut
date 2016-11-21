@@ -11,7 +11,7 @@ namespace Haircut.Core.Services
 {
     public class LoginService : BaseService, ILoginService
     {
-        public Login Log(Login login)
+        public async Task<Login> Log(Login login)
         {
             var request = new RestRequest("login/", Method.POST);
             //request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
@@ -35,7 +35,7 @@ namespace Haircut.Core.Services
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
-            var userResponse = _client.Execute<Login>(request);
+            var userResponse = await _client.ExecuteTaskAsync<Login>(request);
             var user = userResponse.Data;
             return user;
             //var name = user;

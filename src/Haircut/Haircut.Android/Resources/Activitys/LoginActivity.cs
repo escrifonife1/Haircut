@@ -30,11 +30,11 @@ namespace Haircut.Android
             var editText_userName = FindViewById<EditText>(Resource.Id.editText_userName);
             var editText_passWord = FindViewById<EditText>(Resource.Id.editText_passWorl);
 
-            button_confirm.Click += (s, e) =>
+            button_confirm.Click += async (s, e) =>
             {
                 var loginService = ManagerFactory.GetInstance<ILoginService>();
 
-                var login = loginService.Log(new Login()
+                var login = await loginService.Log(new Login()
                 {
                     UserName = editText_userName.Text,
                     Password = editText_passWord.Text
