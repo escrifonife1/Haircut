@@ -15,7 +15,7 @@ using Android.Content.PM;
 using Plugin.Permissions;
 using Humanizer;
 
-namespace Haircut.Android.Resources.Activitys
+namespace Haircut.Droid.Resources.Activitys
 {
     public abstract class ActivityPermissionBase : ActivityBase, ActivityCompat.IOnRequestPermissionsResultCallback
     {

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaircutWebApi", "HaircutWeb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaircutWebApi.Tests", "HaircutWebApi.Tests\HaircutWebApi.Tests.csproj", "{01917CE9-C9C3-4160-BA42-47B1C2A3A473}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haircut.Android", "Haircut.Android\Haircut.Android.csproj", "{4BA25AE1-EDA4-4691-8224-ED5272EDB9D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haircut.Droid", "Haircut.Android\Haircut.Droid.csproj", "{4BA25AE1-EDA4-4691-8224-ED5272EDB9D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haircut.XF", "Haircut.XF\Haircut.XF\Haircut.XF.csproj", "{AA1D04F4-6C46-440A-8DC3-24FF9FB213A6}"
 EndProject

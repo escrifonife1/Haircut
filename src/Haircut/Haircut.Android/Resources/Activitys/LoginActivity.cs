@@ -12,10 +12,10 @@ using Android.Views;
 using Android.Widget;
 using Haircut.Core.Services;
 using Haircut.Model.Models;
-using Haircut.Android.Resources.Factory;
+using Haircut.Droid.Resources.Factory;
 using Haircut.Core.Contract;
 
-namespace Haircut.Android.Resources.Activitys
+namespace Haircut.Droid.Resources.Activitys
 {
 	[Activity(Label = "Login")]
 	public class LoginActivity : ActivityPermissionBase
@@ -42,19 +42,15 @@ namespace Haircut.Android.Resources.Activitys
                         UserName = editText_userName.Text,
                         Password = editText_passWord.Text
                     });
-
-                    Toast toast;
-
+                    
                     if (login?.Id > 0)
                     {
-                        toast = Toast.MakeText(this, "Correto", ToastLength.Long);
+                        StartActivity(typeof(HorariosDisponiveisActivity));
                     }
                     else
                     {
-                        toast = Toast.MakeText(this, "Usuário ou senha incorreto!", ToastLength.Long);
-                    }
-
-                    toast.Show();
+                        Toast.MakeText(this, "Usuário ou senha incorreto!", ToastLength.Long).Show();
+                    }                    
                 });
             };
 		}        

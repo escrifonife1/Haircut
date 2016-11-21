@@ -1,9 +1,9 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using Haircut.Android.Resources.Activitys;
+using Haircut.Droid.Resources.Activitys;
 
-namespace Haircut.Android
+namespace Haircut.Droid
 {
     [Activity(Label = "Haircut", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity

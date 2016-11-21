@@ -12,7 +12,7 @@ using Android.Widget;
 using System.Threading.Tasks;
 using Humanizer;
 
-namespace Haircut.Android.Resources.Activitys
+namespace Haircut.Droid.Resources.Activitys
 {
     public abstract class ActivityBase : Activity
     {

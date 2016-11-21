@@ -13,7 +13,7 @@ using SimpleInjector;
 using Haircut.Core.Contract;
 using Haircut.Core.Services;
 
-namespace Haircut.Android.Resources.Factory
+namespace Haircut.Droid.Resources.Factory
 {
     public class ManagerFactory
     {
@@ -29,6 +29,7 @@ namespace Haircut.Android.Resources.Factory
             container = new Container();
 
             container.Register<ILoginService, LoginService>();
+            container.Register<IHorariosService, HorariosService>();
 
             container.Verify();            
         }

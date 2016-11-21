@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Haircut.Android.Haircut.Android" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Haircut.Droid.Haircut.Droid" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23" />
-	<application android:label="Haircut.Android" android:icon="@drawable/Icon"></application>
+	<application android:label="Haircut.Droid" android:icon="@drawable/Icon"></application>
 </manifest>
