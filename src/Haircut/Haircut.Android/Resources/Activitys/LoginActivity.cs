@@ -15,10 +15,10 @@ using Haircut.Model.Models;
 using Haircut.Android.Resources.Factory;
 using Haircut.Core.Contract;
 
-namespace Haircut.Android
+namespace Haircut.Android.Resources.Activitys
 {
 	[Activity(Label = "Login")]
-	public class LoginActivity : Activity
+	public class LoginActivity : ActivityPermissionBase
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -32,26 +32,31 @@ namespace Haircut.Android
 
             button_confirm.Click += async (s, e) =>
             {
-                var loginService = ManagerFactory.GetInstance<ILoginService>();
-
-                var login = await loginService.Log(new Login()
+                //await IsPermissionGranted(Plugin.Permissions.Abstractions.Permission.Camera);
+                await MakeRequestAsync(async () =>
                 {
-                    UserName = editText_userName.Text,
-                    Password = editText_passWord.Text
+                    var loginService = ManagerFactory.GetInstance<ILoginService>();
+
+                    var login = await loginService.Log(new Login()
+                    {
+                        UserName = editText_userName.Text,
+                        Password = editText_passWord.Text
+                    });
+
+                    Toast toast;
+
+                    if (login?.Id > 0)
+                    {
+                        toast = Toast.MakeText(this, "Correto", ToastLength.Long);
+                    }
+                    else
+                    {
+                        toast = Toast.MakeText(this, "Usuário ou senha incorreto!", ToastLength.Long);
+                    }
+
+                    toast.Show();
                 });
-
-                Toast toast;
-                if(login?.Id > 0)
-                {
-                    toast = Toast.MakeText(this, "Correto", ToastLength.Long);
-                }
-                else
-                {
-                    toast = Toast.MakeText(this, "Usuário ou senha incorreto!", ToastLength.Long);
-                }
-
-                toast.Show();
             };
-		}
+		}        
     }
 }
