@@ -5,7 +5,7 @@ using Haircut.Droid.Resources.Activitys;
 
 namespace Haircut.Droid
 {
-    [Activity(Label = "Haircut", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Haircut", MainLauncher = true)]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
