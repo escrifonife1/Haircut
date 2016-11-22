@@ -30,6 +30,20 @@
             android:layout_height="2dp"
             android:background="#f7f7f7" />
         <EditText
+            android:id="@+id/editText_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:hint="Telefone"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:background="@android:color/black" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#f7f7f7" />
+        <EditText
             android:id="@+id/editText_passWorl"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
@@ -37,18 +51,24 @@
             android:background="@android:color/black"
             android:hint="Senha"
             android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#f7f7f7" />
+        <EditText
+            android:id="@+id/editText_confirm_passWorl"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:background="@android:color/black"
+            android:hint="Confirmar Senha"
+            android:singleLine="true"
             android:imeOptions="actionSend"
             android:inputType="textPassword" />
         <Button
             android:id="@+id/button_confirm"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#307FC1"
-            android:text="Login"
-            android:textColor="@android:color/white" />
-        <Button
-            android:id="@+id/button_register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Contract
 {
-    public interface IHorariosService
+    public interface ISchedulesService
     {
         Task<List<string>> Disponiveis();
     }

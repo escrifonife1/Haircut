@@ -29,6 +29,12 @@ namespace Haircut.Droid.Resources.Activitys
             var button_confirm = FindViewById<Button>(Resource.Id.button_confirm);
             var editText_userName = FindViewById<EditText>(Resource.Id.editText_userName);
             var editText_passWord = FindViewById<EditText>(Resource.Id.editText_passWorl);
+            var button_register = FindViewById<Button>(Resource.Id.button_register);
+
+            button_register.Click += (s, e) =>
+            {
+                StartActivity(typeof(RegisterActivity)); 
+            };
 
             button_confirm.Click += async (s, e) =>
             {
@@ -45,7 +51,7 @@ namespace Haircut.Droid.Resources.Activitys
                     
                     if (login?.Id > 0)
                     {
-                        StartActivity(typeof(HorariosDisponiveisActivity));
+                        StartActivity(typeof(SchedulesAvailable));
                     }
                     else
                     {

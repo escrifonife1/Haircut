@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Services
 {
-    public class HorariosService : BaseService, IHorariosService
+    public class SchedulesService : BaseService, ISchedulesService
     {
         public Task<List<string>> Disponiveis()
         {

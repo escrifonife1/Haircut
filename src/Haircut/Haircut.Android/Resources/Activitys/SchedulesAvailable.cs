@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Haircut.Droid.Resources.Activitys
 {
 	[Activity(Label = "Horarios Disponiveis")]
-	public class HorariosDisponiveisActivity : ActivityPermissionBase
+	public class SchedulesAvailable : ActivityPermissionBase
 	{
         private ListView _horariosDisponiveis;
 
@@ -26,7 +26,7 @@ namespace Haircut.Droid.Resources.Activitys
 		{
 			base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.HorariosDisponiveis);
+            SetContentView(Resource.Layout.SchedulesAvailable);
 
             _horariosDisponiveis = FindViewById<ListView>(Resource.Id.listViewHorarios);
             _horariosDisponiveis.ItemClick += _horariosDisponiveis_ItemClick;
@@ -45,7 +45,7 @@ namespace Haircut.Droid.Resources.Activitys
 
             await MakeRequestAsync(async () =>
             {
-                var horariosDisponiveisService = ManagerFactory.GetInstance<IHorariosService>();
+                var horariosDisponiveisService = ManagerFactory.GetInstance<ISchedulesService>();
                 var horariosDisponiveis = await horariosDisponiveisService.Disponiveis();
                 _horariosDisponiveis.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, horariosDisponiveis.ToArray());
             });

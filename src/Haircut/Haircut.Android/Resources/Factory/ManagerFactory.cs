@@ -29,7 +29,7 @@ namespace Haircut.Droid.Resources.Factory
             container = new Container();
 
             container.Register<ILoginService, LoginService>();
-            container.Register<IHorariosService, HorariosService>();
+            container.Register<ISchedulesService, SchedulesService>();
 
             container.Verify();            
         }
