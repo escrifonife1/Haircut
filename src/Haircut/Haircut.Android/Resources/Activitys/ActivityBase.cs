@@ -14,6 +14,7 @@ using Humanizer;
 
 namespace Haircut.Droid.Resources.Activitys
 {
+    [Activity(Icon = "@drawable/haircut")]
     public abstract class ActivityBase : Activity
     {
         private ProgressDialog _progressDialog;
@@ -25,6 +26,11 @@ namespace Haircut.Droid.Resources.Activitys
             //SetTheme(Android.Resource.Style.ThemeMaterialDialogWhenLarge);
             //SetTheme(Android.Resource.Style.ThemeMaterialWallpaper);
             _progressDialog = new ProgressDialog(this);
+
+            /*ActionBar.SetLogo(Resource.Drawable.haircut);
+            ActionBar.SetDisplayUseLogoEnabled(true);
+            ActionBar.SetHomeButtonEnabled(true);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);*/
         }
 
         public void ShowDialogFragment(DialogFragment fragment)

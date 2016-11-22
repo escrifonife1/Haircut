@@ -6,7 +6,7 @@ using Haircut.Droid.Resources.Activitys;
 namespace Haircut.Droid
 {
     [Activity(Label = "Haircut", MainLauncher = true)]
-    public class MainActivity : Activity
+    public class MainActivity : ActivityPermissionBase
     {
         protected override void OnCreate(Bundle bundle)
         {
