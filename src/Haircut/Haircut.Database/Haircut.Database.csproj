@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201611231945369_AddColumnInScheduleTable.Designer.cs">
       <DependentUpon>201611231945369_AddColumnInScheduleTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611232330197_AddColumnLoginIdInTableSchedule.cs" />
+    <Compile Include="Migrations\201611232330197_AddColumnLoginIdInTableSchedule.Designer.cs">
+      <DependentUpon>201611232330197_AddColumnLoginIdInTableSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611231945369_AddColumnInScheduleTable.resx">
       <DependentUpon>201611231945369_AddColumnInScheduleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611232330197_AddColumnLoginIdInTableSchedule.resx">
+      <DependentUpon>201611232330197_AddColumnLoginIdInTableSchedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

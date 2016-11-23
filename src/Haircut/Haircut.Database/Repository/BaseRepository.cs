@@ -32,6 +32,12 @@ namespace Haircut.Database.Repository
             _context.SaveChanges();
         }
 
+        public virtual void Update<T1>(T1 entity) where T1 : class
+        {
+            //_context.Entry
+            _context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+        }
+
         public virtual T GetById(int id) 
         {
             return (T)_context.Set(typeof(T)).Find(id);

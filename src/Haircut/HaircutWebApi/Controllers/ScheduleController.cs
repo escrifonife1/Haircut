@@ -12,9 +12,11 @@ namespace HaircutWebApi.Controllers
     public class ScheduleController : ApiController
     {
         private IScheduleRepository _scheduleRepository;
+        private ILoginRepository _loginRepository;
 
-        public ScheduleController(IScheduleRepository scheduleRepository)
+        public ScheduleController(IScheduleRepository scheduleRepository, ILoginRepository loginRepository)
         {
+            _loginRepository = loginRepository;
             _scheduleRepository = scheduleRepository;
         }
 
@@ -25,15 +27,15 @@ namespace HaircutWebApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(DateTime from)
+        public IHttpActionResult Get(DateTime from, int loginId)
         {
-            return Ok(_scheduleRepository.GetFromDate(from));
+            return Ok(_scheduleRepository.GetFromDate(from, loginId));
         }
 
         [HttpPut]
-        public IHttpActionResult Put(Schedule schedule)
+        public IHttpActionResult Put([FromBody]Schedule schedule)
         {
-            _scheduleRepository.Add(schedule);
+            _scheduleRepository.Update(schedule);
             _scheduleRepository.Save();
 
             return Ok();
@@ -42,7 +44,8 @@ namespace HaircutWebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            var lastSchedule = _scheduleRepository.GetFromDate(DateTime.Today.AddHours(8)).OrderBy(s => s.Date).LastOrDefault();
+            var login = _loginRepository.GetById(7);
+            var lastSchedule = _scheduleRepository.GetFromDate(DateTime.Today.AddHours(8), login.Id).OrderBy(s => s.Date).LastOrDefault();
 
             var horarioInicial = lastSchedule?.Date.Date.AddDays(1) ?? DateTime.Today.AddHours(8);
             Schedule schedule;

@@ -14,6 +14,7 @@ using Haircut.Core.Services;
 using Haircut.Model.Models;
 using Haircut.Droid.Resources.Factory;
 using Haircut.Core.Contract;
+using Acr.Settings;
 
 namespace Haircut.Droid.Resources.Activitys
 {
@@ -51,6 +52,8 @@ namespace Haircut.Droid.Resources.Activitys
                     
                     if (login?.Id > 0)
                     {
+                        Settings.Local.Set("login", login);
+
                         StartActivity(typeof(SchedulesAvailable));
                     }
                     else

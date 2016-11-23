@@ -9,7 +9,8 @@ namespace Haircut.Core.Contract
 {
     public interface ISchedulesService : IErrorMessages
     {
-        Task<List<Schedule>> Disponiveis(DateTime from);
+        Task<List<Schedule>> Availables(DateTime from, int loginId);
         Task<Schedule> ScheduleByLogin(Login login);
+        Task Schedule(Schedule schedule);
     }
 }

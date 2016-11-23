@@ -11,10 +11,12 @@ namespace Haircut.Core.Services
 {
     public class SchedulesService : BaseService, ISchedulesService
     {
-        public async Task<List<Schedule>> Disponiveis(DateTime from)
+        public async Task<List<Schedule>> Availables(DateTime from, int loginId)
         {
             var request = new RestRequest("schedule/{from}", Method.GET);
-			request.AddParameter("from", from.ToString()); // replaces matching token in request.Resource
+            //var dataJson = Newtonsoft.Json.JsonConvert.SerializeObject(login);
+            request.AddParameter("from", from.ToString()); // replaces matching token in request.Resource
+            request.AddParameter("loginId", loginId); // replaces matching token in request.Resource
 
             var userResponse = await _client.ExecuteTaskAsync<List<Schedule>>(request);
             return userResponse.Data;
@@ -32,6 +34,11 @@ namespace Haircut.Core.Services
             return Task.FromResult(disponiveis);*/
         }
 
+        public async Task Schedule(Schedule schedule)
+        {
+            await PutFromRequestBody(schedule, "schedule");
+        }
+
         public async Task<Schedule> ScheduleByLogin(Login login)
         {
             var request = new RestRequest("schedule/{loginId}", Method.GET);            
@@ -40,5 +47,7 @@ namespace Haircut.Core.Services
             var userResponse = await _client.ExecuteTaskAsync<Schedule>(request);
             return userResponse.Data;            
         }
+
+        
     }
 }

@@ -48,8 +48,8 @@ namespace Haircut.Core.Services
             var request = new RestRequest($"{resource}/", method);
             request.AddHeader("Accept", "application/json");
             request.Parameters.Clear();
-            var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
-            request.AddParameter("application/json", loginJson, ParameterType.RequestBody);
+            var dataJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            request.AddParameter("application/json", dataJson, ParameterType.RequestBody);
 
             var responseData = await _client.ExecuteTaskAsync<T>(request);
             AddErrorMessageIfNeeded(responseData);
