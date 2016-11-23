@@ -20,17 +20,32 @@ namespace Haircut.Core.Services
             // client.Authenticator = new HttpBasicAuthenticator(username, password);            
         }
 
-        public async Task<T> PostFromRequestBody<T>(T data, string resource)
+        public async Task<T> FromRequestBody<T>(T data, string resource, Method method)
         {
-            var request = new RestRequest($"{resource}/", Method.POST);
+            var request = new RestRequest($"{resource}/", method);
             request.AddHeader("Accept", "application/json");
             request.Parameters.Clear();
             var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             request.AddParameter("application/json", loginJson, ParameterType.RequestBody);
 
-            /*IRestResponse response = await _client.ExecuteTaskAsync(request);
-            var content = response.Content; */
             var responseData = await _client.ExecuteTaskAsync<T>(request);
+            AddErrorMessageIfNeeded(responseData);
+
+            return responseData.Data;
+        }
+
+        public async Task<T> PostFromRequestBody<T>(T data, string resource)
+        {
+            return await FromRequestBody(data, resource, Method.POST);
+        }       
+
+        public async Task<T> PutFromRequestBody<T>(T data, string resource)
+        {
+            return await FromRequestBody(data, resource, Method.PUT);
+        }
+
+        private void AddErrorMessageIfNeeded<T>(IRestResponse<T> responseData)
+        {
             _errorMessage = responseData.ErrorMessage;
 
             if (responseData.StatusCode != System.Net.HttpStatusCode.OK)
@@ -39,8 +54,6 @@ namespace Haircut.Core.Services
 
                 _errorMessage = contentObject?.Message;
             }
-
-            return responseData.Data;
         }
 
         public string ErrorMessage()
