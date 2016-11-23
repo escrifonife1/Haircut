@@ -21,8 +21,8 @@ namespace HaircutWebApi.Controllers
             _loginRepository = loginRepository;
         }
 
-        [HttpPost]
-        public IHttpActionResult Get([FromBody] Login lo)
+        [HttpPut]
+        public IHttpActionResult Put([FromBody] Login lo)
         {
             Login login;
 
@@ -34,7 +34,31 @@ namespace HaircutWebApi.Controllers
             {
                 login = new Login()
                 {
-                    Id = 99,
+                    Id = 99999,
+                    UserName = ex.ToString(),
+                    Password = "Error"
+                };
+            }
+
+            return Ok(login);
+
+        }
+
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] Login lo)
+        {
+            Login login;
+
+            try
+            {
+                _loginRepository.Add(lo);
+                login = _loginRepository.GetByLogin(lo);
+            }
+            catch (Exception ex)
+            {
+                login = new Login()
+                {
+                    Id = 99999,
                     UserName = ex.ToString(),
                     Password = "Error"
                 };

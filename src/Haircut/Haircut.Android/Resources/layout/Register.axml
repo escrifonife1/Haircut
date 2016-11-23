@@ -16,6 +16,20 @@
             android:layout_marginBottom="20dp"
             android:src="@drawable/haircut" />
         <EditText
+            android:id="@+id/editText_Name"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:hint="Nome"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:background="@android:color/black" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#f7f7f7" />
+        <EditText
             android:id="@+id/editText_userName"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
@@ -44,7 +58,7 @@
             android:layout_height="2dp"
             android:background="#f7f7f7" />
         <EditText
-            android:id="@+id/editText_passWorl"
+            android:id="@+id/editText_passWord"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:padding="5dp"
@@ -58,7 +72,7 @@
             android:layout_height="2dp"
             android:background="#f7f7f7" />
         <EditText
-            android:id="@+id/editText_confirm_passWorl"
+            android:id="@+id/editText_confirm_passWord"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:padding="5dp"
@@ -68,7 +82,7 @@
             android:imeOptions="actionSend"
             android:inputType="textPassword" />
         <Button
-            android:id="@+id/button_confirm"
+            android:id="@+id/button_register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

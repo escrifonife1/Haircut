@@ -11,9 +11,47 @@ namespace Haircut.Core.Services
 {
     public class LoginService : BaseService, ILoginService
     {
+        private string _errorMessage;
+
+        public bool IsValideForRegister(Login login)
+        {
+            _errorMessage = string.Empty;
+
+            if (string.IsNullOrEmpty(login.Name))
+            {
+                _errorMessage = "Informe o nome";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(login.UserName))
+            {
+                _errorMessage = "Informe o usuário";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(login.Phone))
+            {
+                _errorMessage = "Informe o telefone";
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(login.Password))
+            {
+                _errorMessage = "Informe a senha";
+                return false;
+            }
+
+            return true;
+        }
+
+        public string ErrorMessage()
+        {
+            return _errorMessage;
+        }
+
         public async Task<Login> Log(Login login)
         {
-            var request = new RestRequest("login/", Method.POST);
+            var request = new RestRequest("login/", Method.PUT);
             //request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
             //request.AddUrlSegment("id", "1"); // replaces matching token in request.Resource
             //request.AddBody(login);
@@ -52,6 +90,28 @@ namespace Haircut.Core.Services
 
             //// abort the request on demand
             //asyncHandle.Abort();            
+        }
+
+        public async Task<T> PostFromRequestBody<T>(T data, string resource)
+        {
+            var request = new RestRequest($"{resource}/", Method.POST);
+            request.AddHeader("Accept", "application/json");            
+            request.Parameters.Clear();
+            var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            request.AddParameter("application/json", loginJson, ParameterType.RequestBody);
+            
+            IRestResponse response = _client.Execute(request);
+            var content = response.Content; 
+            var responseData = await _client.ExecuteTaskAsync<T>(request);
+			_errorMessage = responseData.ErrorMessage;
+
+            return responseData.Data;            
+        }
+
+        public async Task<Login> Register(Login login)
+        {
+            var lo = await PostFromRequestBody<Login>(login, "login");
+            return lo;
         }
 
         public Login Log1(Login login)

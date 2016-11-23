@@ -10,5 +10,8 @@ namespace Haircut.Core.Contract
     public interface ILoginService
     {
         Task<Login> Log(Login login);
+        Task<Login> Register(Login login);
+        bool IsValideForRegister(Login login);
+        string ErrorMessage();
     }
 }
