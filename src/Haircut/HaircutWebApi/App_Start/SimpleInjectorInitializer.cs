@@ -92,6 +92,7 @@ namespace HaircutWebApi.App_Start
             // Register your types, for instance using the scoped lifestyle:
             container.Register<DatabaseContext>(Lifestyle.Scoped);
             container.Register<ILoginRepository, LoginRepository>(Lifestyle.Scoped);
+            container.Register<IScheduleRepository, ScheduleRepository>(Lifestyle.Scoped);
 
             // For instance:
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Scoped);

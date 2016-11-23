@@ -14,27 +14,29 @@ using Haircut.Droid.Resources.Factory;
 using Haircut.Core.Contract;
 using Android;
 using System.Threading.Tasks;
+using Haircut.Model.Models;
 
 namespace Haircut.Droid.Resources.Activitys
 {
 	[Activity(Label = "Horarios Disponiveis")]
 	public class SchedulesAvailable : ActivityPermissionBase
 	{
-        private ListView _horariosDisponiveis;
+        private ListView _listView_horariosDisponiveis;
+        private List<Schedule> _horariosDisponiveis;
 
-		protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.SchedulesAvailable);
 
-            _horariosDisponiveis = FindViewById<ListView>(Resource.Id.listViewHorarios);
-            _horariosDisponiveis.ItemClick += _horariosDisponiveis_ItemClick;
+            _listView_horariosDisponiveis = FindViewById<ListView>(Resource.Id.listViewHorarios);
+            _listView_horariosDisponiveis.ItemClick += _horariosDisponiveis_ItemClick;
 		}
 
         private void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var horario =(string) _horariosDisponiveis.GetItemAtPosition(e.Position);
+            var horario = (string)_listView_horariosDisponiveis.GetItemAtPosition(e.Position);
 
             Toast.MakeText(this, horario, ToastLength.Long).Show();
         }
@@ -46,8 +48,9 @@ namespace Haircut.Droid.Resources.Activitys
             await MakeRequestAsync(async () =>
             {
                 var horariosDisponiveisService = ManagerFactory.GetInstance<ISchedulesService>();
-                var horariosDisponiveis = await horariosDisponiveisService.Disponiveis();
-                _horariosDisponiveis.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, horariosDisponiveis.ToArray());
+                _horariosDisponiveis = await horariosDisponiveisService.Disponiveis(DateTime.Today.AddHours(-2));
+                var horariosDisponiveis = _horariosDisponiveis.Select(s => s.Date.ToString("dd/MM/yyyy hh:mm")).ToArray();
+                _listView_horariosDisponiveis.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, horariosDisponiveis);
             });
         }
 

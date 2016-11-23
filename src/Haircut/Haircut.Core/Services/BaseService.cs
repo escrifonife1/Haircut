@@ -20,6 +20,29 @@ namespace Haircut.Core.Services
             // client.Authenticator = new HttpBasicAuthenticator(username, password);            
         }
 
+        public async Task<TOut> Get<TIn, TOut>(TIn data, string resource, string paramName)
+        {
+            var request = new RestRequest($"{resource}/{paramName}", Method.GET);
+            //request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
+            request.AddUrlSegment($"{paramName}", data.ToString()); // replaces matching token in request.Resource
+
+            // easily add HTTP Headers
+            //request.AddHeader("header", "value");
+
+            // add files to upload (works with compatible verbs)
+            //request.AddFile(path);
+
+            // execute the request
+            /*IRestResponse response = _client.Execute(request);
+            var content = response.Content;*/ // raw content as string
+
+            // or automatically deserialize result
+            // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
+            var userResponse = await _client.ExecuteTaskAsync<TOut>(request);
+            var user = userResponse.Data;
+            return user;
+        }
+
         public async Task<T> FromRequestBody<T>(T data, string resource, Method method)
         {
             var request = new RestRequest($"{resource}/", method);

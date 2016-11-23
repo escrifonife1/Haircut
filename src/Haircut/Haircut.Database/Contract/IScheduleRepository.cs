@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Contract
 {
-    public interface ILoginRepository : IBaseRepository<Login>
-    {        
-        Login GetByLogin(Login login);
-        Login GetByUserName(string userName);
+    public interface IScheduleRepository : IBaseRepository<Schedule>
+    {
+        Schedule GetByLoginId(int userId);
+        List<Schedule> GetFromDate(DateTime from);
     }
 }

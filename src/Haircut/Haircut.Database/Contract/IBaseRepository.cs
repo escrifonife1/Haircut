@@ -11,5 +11,6 @@ namespace Haircut.Database.Contract
         void Add(T entity); 
         void Delete(T entity);
         void Save();
+        T GetById(int id);
     }
 }

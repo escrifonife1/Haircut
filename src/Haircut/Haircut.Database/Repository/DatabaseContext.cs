@@ -18,11 +18,13 @@ namespace Haircut.Database.Repository
         }
 
         public DbSet<Login> Login { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new LoginConfiguration());
+            modelBuilder.Configurations.Add(new ScheduleConfiguration());
         }
 
     }

@@ -31,5 +31,10 @@ namespace Haircut.Database.Repository
         {
             _context.SaveChanges();
         }
+
+        public virtual T GetById(int id) 
+        {
+            return (T)_context.Set(typeof(T)).Find(id);
+        }
     }
 }

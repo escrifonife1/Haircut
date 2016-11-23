@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Haircut.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Haircut.Core.Contract
 {
     public interface ISchedulesService : IErrorMessages
     {
-        Task<List<string>> Disponiveis();
+        Task<List<Schedule>> Disponiveis(DateTime from);
+        Task<Schedule> ScheduleByLogin(Login login);
     }
 }
