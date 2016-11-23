@@ -8,13 +8,11 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-
 namespace HaircutWebApi.Controllers
 {
     public class LoginController : ApiController
     {
-        private ILoginRepository _loginRepository;
-        
+        private ILoginRepository _loginRepository;        
            
         public LoginController(ILoginRepository loginRepository)
         {
@@ -26,22 +24,9 @@ namespace HaircutWebApi.Controllers
         {
             Login login;
 
-            try
-            {
-                login = _loginRepository.GetByLogin(lo);
-            }
-            catch(Exception ex)
-            {
-                login = new Login()
-                {
-                    Id = 99999,
-                    UserName = ex.ToString(),
-                    Password = "Error"
-                };
-            }
+            login = _loginRepository.GetByLogin(lo);
 
             return Ok(login);
-
         }
 
         [HttpPost]
@@ -49,23 +34,18 @@ namespace HaircutWebApi.Controllers
         {
             Login login;
 
-            try
+            login = _loginRepository.GetByUserName(lo.UserName);
+
+            if(login != null)
             {
-                _loginRepository.Add(lo);
-                login = _loginRepository.GetByLogin(lo);
+                return BadRequest("Esse usuário já esta cadastrado, por favor, informe outro nome de usuário!");
             }
-            catch (Exception ex)
-            {
-                login = new Login()
-                {
-                    Id = 99999,
-                    UserName = ex.ToString(),
-                    Password = "Error"
-                };
-            }
+
+            _loginRepository.Add(lo);
+            _loginRepository.Save();
+            login = _loginRepository.GetByLogin(lo);
 
             return Ok(login);
-
         }
     }
 }

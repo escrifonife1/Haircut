@@ -11,5 +11,6 @@ namespace Haircut.Database.Contract
     {
         Login GetById(int id);
         Login GetByLogin(Login login);
+        Login GetByUserName(string userName);
     }
 }

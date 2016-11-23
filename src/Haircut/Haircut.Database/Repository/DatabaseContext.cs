@@ -1,4 +1,4 @@
-﻿using Haircut.Database.Migration;
+﻿using Haircut.Database.Configuration;
 using Haircut.Model.Models;
 using System;
 using System.Collections.Generic;

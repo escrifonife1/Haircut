@@ -68,7 +68,7 @@ namespace Haircut.Droid.Resources.Activitys
 					}
 					else
 					{
-
+						Toast.MakeText(this, loginService.ErrorMessage(), ToastLength.Long).Show();
 					}
 				});
             };

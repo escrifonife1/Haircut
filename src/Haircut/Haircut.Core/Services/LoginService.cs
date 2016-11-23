@@ -68,8 +68,8 @@ namespace Haircut.Core.Services
             //request.AddFile(path);
 
             // execute the request
-            IRestResponse response = _client.Execute(request);
-            var content = response.Content; // raw content as string
+            /*IRestResponse response = await _client.ExecuteTaskAsync(request);
+            var content = response.Content;*/ // raw content as string
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
@@ -100,13 +100,22 @@ namespace Haircut.Core.Services
             var loginJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             request.AddParameter("application/json", loginJson, ParameterType.RequestBody);
             
-            IRestResponse response = _client.Execute(request);
-            var content = response.Content; 
+            /*IRestResponse response = await _client.ExecuteTaskAsync(request);
+            var content = response.Content; */
             var responseData = await _client.ExecuteTaskAsync<T>(request);
 			_errorMessage = responseData.ErrorMessage;
 
+            if(responseData.StatusCode != System.Net.HttpStatusCode.OK)
+            {                
+                dynamic contentObject = Newtonsoft.Json.JsonConvert.DeserializeObject(responseData.Content) ;
+             
+                _errorMessage = contentObject?.Message;
+            }
+
             return responseData.Data;            
         }
+
+        
 
         public async Task<Login> Register(Login login)
         {
@@ -127,8 +136,8 @@ namespace Haircut.Core.Services
             //request.AddFile(path);
 
             // execute the request
-            IRestResponse response = _client.Execute(request);
-            var content = response.Content; // raw content as string
+            /*IRestResponse response = _client.Execute(request);
+            var content = response.Content;*/ // raw content as string
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
