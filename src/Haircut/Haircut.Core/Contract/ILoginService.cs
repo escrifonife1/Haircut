@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Contract
 {
-    public interface ILoginService
+    public interface ILoginService : IErrorMessages
     {
         Task<Login> Log(Login login);
         Task<Login> Register(Login login);
-        bool IsValideForRegister(Login login);
-        string ErrorMessage();
+        bool IsValideForRegister(Login login);        
     }
 }

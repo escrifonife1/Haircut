@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Contract
 {
-    public interface ISchedulesService
+    public interface ISchedulesService : IErrorMessages
     {
         Task<List<string>> Disponiveis();
     }

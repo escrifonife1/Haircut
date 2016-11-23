@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IErrorMessages.cs" />
     <Compile Include="Contract\ISchedulesService.cs" />
     <Compile Include="Contract\ILoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
