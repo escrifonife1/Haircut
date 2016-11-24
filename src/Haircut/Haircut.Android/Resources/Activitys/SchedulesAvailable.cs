@@ -45,22 +45,70 @@ namespace Haircut.Droid.Resources.Activitys
             var horario = (string)_listView_horariosDisponiveis.GetItemAtPosition(e.Position);
 
             var schedule = _schedulesAvailables.ElementAt(e.Position);
-            schedule.LoginId = _login.Id;
-            schedule.Available = 0;
-            schedule.Login = _login;
-            await _scheduleService.Schedule(schedule);
 
-            Toast.MakeText(this, horario, ToastLength.Long).Show();
+            Func<int, Task> func = async (available) =>
+            {
+                schedule.LoginId = _login.Id;
+                schedule.Available = available;
+                schedule.Login = _login;
+                await _scheduleService.Schedule(schedule);
+
+				if (string.IsNullOrWhiteSpace(_scheduleService.ErrorMessage()))
+				{
+					Toast.MakeText(this, horario, ToastLength.Long).Show();
+				}
+				else
+				{
+					Toast.MakeText(this, _scheduleService.ErrorMessage(), ToastLength.Long).Show();
+				}
+				await SchedulesAvailables();
+            };
+
+            var ab = new AlertDialog.Builder(this);
+            if (schedule.LoginId == _login.Id)
+            {                
+                ab.SetMessage($"Desmarcar horário?")
+                .SetPositiveButton("Sim", async (oo, ee) =>
+                {
+                    await MakeRequestAsync(async () => await func(1));
+                })
+                .SetNegativeButton("Não", (ooo, eee) => { });
+            }
+            else
+            {
+                ab.SetMessage($"Marcar horário?")
+                .SetPositiveButton("Sim", async (oo, ee) =>
+                {
+                    await MakeRequestAsync(async () => await func(0));
+                })
+                .SetNegativeButton("Não", (ooo, eee) => { });
+            }
+
+			ab.Show();            
         }
 
         protected async override void OnResume()
         {
             base.OnResume();
+            await SchedulesAvailables();
+        }
 
+        private async Task SchedulesAvailables()
+        {
             await MakeRequestAsync(async () =>
-            {                
+            {
                 _schedulesAvailables = await _scheduleService.Availables(DateTime.Today.AddHours(-2), _login.Id);
-                var schedulesAvailables = _schedulesAvailables.Select(s => s.Date.ToString("dd/MM/yyyy hh:mm")).ToArray();
+                var schedulesAvailables = _schedulesAvailables.Select(s =>
+                {
+                    if (s.LoginId == _login.Id)
+                    {
+                        return $"Seu horário {s.Date.ToString("dd /MM/yyyy hh:mm")}";
+                    }
+                    else
+                    {
+                        return $"Disponível {s.Date.ToString("dd /MM/yyyy hh:mm")}";
+                    }
+                }).ToArray();
                 _listView_horariosDisponiveis.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, schedulesAvailables);
             });
         }

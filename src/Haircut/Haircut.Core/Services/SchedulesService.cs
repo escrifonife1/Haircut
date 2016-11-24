@@ -19,6 +19,7 @@ namespace Haircut.Core.Services
             request.AddParameter("loginId", loginId); // replaces matching token in request.Resource
 
             var userResponse = await _client.ExecuteTaskAsync<List<Schedule>>(request);
+            AddErrorMessageIfNeeded(userResponse);
             return userResponse.Data;
 
             /*
@@ -45,6 +46,7 @@ namespace Haircut.Core.Services
             request.AddUrlSegment("loginId", login.Id.ToString()); // replaces matching token in request.Resource
                         
             var userResponse = await _client.ExecuteTaskAsync<Schedule>(request);
+            AddErrorMessageIfNeeded(userResponse);
             return userResponse.Data;            
         }
 

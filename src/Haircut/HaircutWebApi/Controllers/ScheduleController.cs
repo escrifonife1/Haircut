@@ -35,6 +35,21 @@ namespace HaircutWebApi.Controllers
         [HttpPut]
         public IHttpActionResult Put([FromBody]Schedule schedule)
         {
+            if (schedule.Available == 0)
+            {
+                var sh = _scheduleRepository.GetById(schedule.Id);
+                if (sh.Available == 0)
+                {
+                    return BadRequest("Esse horário não esta mais disponível!");
+                }                
+            }
+            else
+            {
+                var login = _loginRepository.GetByUserName("admin");
+                schedule.Login = login;
+                schedule.LoginId = login.Id;
+            }
+
             _scheduleRepository.Update(schedule);
             _scheduleRepository.Save();
 

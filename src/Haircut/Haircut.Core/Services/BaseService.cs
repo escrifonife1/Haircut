@@ -67,7 +67,7 @@ namespace Haircut.Core.Services
             return await FromRequestBody(data, resource, Method.PUT);
         }
 
-        private void AddErrorMessageIfNeeded<T>(IRestResponse<T> responseData)
+        public void AddErrorMessageIfNeeded<T>(IRestResponse<T> responseData)
         {
             _errorMessage = responseData.ErrorMessage;
 
