@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Haircut.Core.Services
@@ -47,11 +48,12 @@ namespace Haircut.Core.Services
         {
             var request = new RestRequest($"{resource}/", method);
             request.AddHeader("Accept", "application/json");
+			request.AddHeader("Content-Type", "application/json; charset=utf-8");
             request.Parameters.Clear();
             var dataJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
             request.AddParameter("application/json", dataJson, ParameterType.RequestBody);
 
-            var responseData = await _client.ExecuteTaskAsync<T>(request);
+            var responseData = await ExecuteTaskAsync<T>(request);
             AddErrorMessageIfNeeded(responseData);
 
             return responseData.Data;
@@ -67,9 +69,9 @@ namespace Haircut.Core.Services
             return await FromRequestBody(data, resource, Method.PUT);
         }
 
-        public void AddErrorMessageIfNeeded<T>(IRestResponse<T> responseData)
+        private void AddErrorMessageIfNeeded<T>(IRestResponse<T> responseData)
         {
-            _errorMessage = responseData.ErrorMessage;
+            //_errorMessage = responseData.ErrorMessage;
 
             if (responseData.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -77,6 +79,22 @@ namespace Haircut.Core.Services
 
                 _errorMessage = contentObject?.Message;
             }
+
+				
+        }
+
+        public async Task<IRestResponse<T>> ExecuteTaskAsync<T>(IRestRequest request, CancellationToken token)
+        {
+            var response = await _client.ExecuteTaskAsync<T>(request, token);
+            AddErrorMessageIfNeeded(response);
+            return response;
+        }
+
+        public async Task<IRestResponse<T>> ExecuteTaskAsync<T>(IRestRequest request)
+        {
+            var response = await _client.ExecuteTaskAsync<T>(request);
+            AddErrorMessageIfNeeded(response);
+            return response;
         }
 
         public string ErrorMessage()

@@ -41,7 +41,9 @@ namespace HaircutWebApi.Controllers
                 if (sh.Available == 0)
                 {
                     return BadRequest("Esse horário não esta mais disponível!");
-                }                
+                }
+                sh.Available = schedule.Available;
+                schedule = sh;             
             }
             else
             {

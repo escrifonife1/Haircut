@@ -42,11 +42,9 @@ namespace Haircut.Droid.Resources.Activitys
 
         private async void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var horario = (string)_listView_horariosDisponiveis.GetItemAtPosition(e.Position);
-
             var schedule = _schedulesAvailables.ElementAt(e.Position);
 
-            Func<int, Task> func = async (available) =>
+            Func<int, string, Task> FuncSchedule = async (available, message) =>
             {
                 schedule.LoginId = _login.Id;
                 schedule.Available = available;
@@ -55,7 +53,7 @@ namespace Haircut.Droid.Resources.Activitys
 
 				if (string.IsNullOrWhiteSpace(_scheduleService.ErrorMessage()))
 				{
-					Toast.MakeText(this, horario, ToastLength.Long).Show();
+					Toast.MakeText(this, message, ToastLength.Long).Show();
 				}
 				else
 				{
@@ -70,7 +68,7 @@ namespace Haircut.Droid.Resources.Activitys
                 ab.SetMessage($"Desmarcar horário?")
                 .SetPositiveButton("Sim", async (oo, ee) =>
                 {
-                    await MakeRequestAsync(async () => await func(1));
+                    await MakeRequestAsync(async () => await FuncSchedule(1, "Horário desmarcado com sucesso!"));
                 })
                 .SetNegativeButton("Não", (ooo, eee) => { });
             }
@@ -79,7 +77,7 @@ namespace Haircut.Droid.Resources.Activitys
                 ab.SetMessage($"Marcar horário?")
                 .SetPositiveButton("Sim", async (oo, ee) =>
                 {
-                    await MakeRequestAsync(async () => await func(0));
+                    await MakeRequestAsync(async () => await FuncSchedule(0, "Horário marcado com sucesso!"));
                 })
                 .SetNegativeButton("Não", (ooo, eee) => { });
             }

@@ -18,21 +18,8 @@ namespace Haircut.Core.Services
             request.AddParameter("from", from.ToString()); // replaces matching token in request.Resource
             request.AddParameter("loginId", loginId); // replaces matching token in request.Resource
 
-            var userResponse = await _client.ExecuteTaskAsync<List<Schedule>>(request);
-            AddErrorMessageIfNeeded(userResponse);
-            return userResponse.Data;
-
-            /*
-            var disponiveis = new List<string>();
-            var horarioInicial = DateTime.Today.AddHours(8);
-
-            for (int i = 0; i < 23; i++)
-            {
-                disponiveis.Add(horarioInicial.ToString("dd/MM/yyyy hh:mm"));
-                horarioInicial = horarioInicial.AddMinutes(30);
-            }
-
-            return Task.FromResult(disponiveis);*/
+            var userResponse = await ExecuteTaskAsync<List<Schedule>>(request);            
+            return userResponse.Data;           
         }
 
         public async Task Schedule(Schedule schedule)
@@ -45,11 +32,8 @@ namespace Haircut.Core.Services
             var request = new RestRequest("schedule/{loginId}", Method.GET);            
             request.AddUrlSegment("loginId", login.Id.ToString()); // replaces matching token in request.Resource
                         
-            var userResponse = await _client.ExecuteTaskAsync<Schedule>(request);
-            AddErrorMessageIfNeeded(userResponse);
+            var userResponse = await ExecuteTaskAsync<Schedule>(request);            
             return userResponse.Data;            
-        }
-
-        
+        }        
     }
 }
