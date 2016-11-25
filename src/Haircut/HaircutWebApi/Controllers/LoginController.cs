@@ -26,6 +26,9 @@ namespace HaircutWebApi.Controllers
 
             login = _loginRepository.GetByLogin(lo);
 
+            if (login == null)
+                return BadRequest("Usuário ou senha inválido");
+
             return Ok(login);
         }
 

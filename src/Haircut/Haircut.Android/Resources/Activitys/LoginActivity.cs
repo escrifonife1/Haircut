@@ -49,17 +49,14 @@ namespace Haircut.Droid.Resources.Activitys
                         UserName = editText_userName.Text,
                         Password = editText_passWord.Text
                     });
-                    
-                    if (login?.Id > 0)
+
+
+                    ValidateServiceAndContinue(loginService, () =>
                     {
                         Settings.Local.Set("login", login);
 
-                        StartActivity(typeof(SchedulesAvailable));
-                    }
-                    else
-                    {
-                        Toast.MakeText(this, "Usuário ou senha incorreto!", ToastLength.Long).Show();
-                    }                    
+                        StartActivity(typeof(SchedulesAvailableActivity));
+                    });                    
                 });
             };
 		}        

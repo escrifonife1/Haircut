@@ -100,7 +100,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Activitys\LoginActivity.cs" />
-    <Compile Include="Resources\Activitys\SchedulesAvailable.cs" />
+    <Compile Include="Resources\Activitys\SchedulesAvailableActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

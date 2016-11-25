@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
 using Humanizer;
+using Haircut.Core.Contract;
 
 namespace Haircut.Droid.Resources.Activitys
 {
@@ -92,6 +93,38 @@ namespace Haircut.Droid.Resources.Activitys
                 if (mostrarMsgProcesando)
                     _progressDialog.Dismiss();
             }
+        }
+
+
+        public async Task<bool> ValidateServiceAndContinue(IErrorMessages service, Func<Task> continueAfterValidated)
+        {
+            var hasErrorMessage = HasErrorMessage(service);
+
+            if (hasErrorMessage)
+                await continueAfterValidated();
+
+            return hasErrorMessage;
+        }
+
+        public bool ValidateServiceAndContinue(IErrorMessages service, Action continueAfterValidated)
+        {
+            var hasErrorMessage = HasErrorMessage(service);
+
+            if (hasErrorMessage)
+                continueAfterValidated();
+
+            return hasErrorMessage;
+        }
+
+        private bool HasErrorMessage(IErrorMessages service)
+        {
+            if (service.HasMessageError())
+            {
+                Toast.MakeText(this, service.ErrorMessage(), ToastLength.Long).Show();
+                return false;
+            }
+
+            return true;
         }
     }
     

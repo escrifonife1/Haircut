@@ -61,15 +61,11 @@ namespace Haircut.Droid.Resources.Activitys
 
 					login = await loginService.Register(login);
 
-					if (login?.Id > 0)
-					{
-						Toast.MakeText(this, "Cadastro registrado com sucesso!", ToastLength.Long).Show();
-						this.Finish();
-					}
-					else
-					{
-						Toast.MakeText(this, loginService.ErrorMessage(), ToastLength.Long).Show();
-					}
+                    ValidateServiceAndContinue(loginService, () =>
+                    {
+                        Toast.MakeText(this, "Cadastro registrado com sucesso!", ToastLength.Long).Show();
+                        this.Finish();
+                    });
 				});
             };
         }        

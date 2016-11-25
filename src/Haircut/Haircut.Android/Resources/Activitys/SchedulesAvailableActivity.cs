@@ -20,7 +20,7 @@ using Acr.Settings;
 namespace Haircut.Droid.Resources.Activitys
 {
 	[Activity(Label = "Horarios Disponiveis")]
-	public class SchedulesAvailable : ActivityPermissionBase
+	public class SchedulesAvailableActivity : ActivityPermissionBase
 	{
         private ListView _listView_horariosDisponiveis;
         private List<Schedule> _schedulesAvailables;
@@ -39,14 +39,14 @@ namespace Haircut.Droid.Resources.Activitys
             _spinner_barbershop = FindViewById<Spinner>(Resource.Id.spinner_barbershop);
             _spinner_hairdresser = FindViewById<Spinner>(Resource.Id.spinner_haridresser);
             _spinner_barbershop.Prompt = "Barbearia";
-            var barbershopAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Black White","Kbloo" });
-            barbershopAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            var barbershopAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, new string[] { "Black White","Kbloo" });
+            
             _spinner_barbershop.Adapter = barbershopAdapter;
             _spinner_barbershop.ItemSelected += (s, e) =>
             {
-                Spinner spinner = (Spinner)s;
+                var spinner = (Spinner)s;
 
-                string toast = string.Format("The planet is {0}", spinner.GetItemAtPosition(e.Position));
+                var toast = string.Format("Barbearia {0}", spinner.GetItemAtPosition(e.Position));
                 Toast.MakeText(this, toast, ToastLength.Long).Show();
                 var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Phill", "John", "Mary" });
                 _spinner_hairdresser.Adapter = hairdresserAdapter;
@@ -55,6 +55,9 @@ namespace Haircut.Droid.Resources.Activitys
             _spinner_hairdresser.Prompt = "Cabelereiro(a)";
             _spinner_hairdresser.ItemSelected += async (s, e) =>
             {
+                var spinner = (Spinner)s;
+                var toast = string.Format("Cabelereiro {0}", spinner.GetItemAtPosition(e.Position));
+                Toast.MakeText(this, toast, ToastLength.Long).Show();
                 await SchedulesAvailables();
             };
 
@@ -73,14 +76,11 @@ namespace Haircut.Droid.Resources.Activitys
                 schedule.Login = _login;
                 await _scheduleService.Schedule(schedule);
 
-				if (string.IsNullOrWhiteSpace(_scheduleService.ErrorMessage()))
-				{
-					Toast.MakeText(this, message, ToastLength.Long).Show();
-				}
-				else
-				{
-					Toast.MakeText(this, _scheduleService.ErrorMessage(), ToastLength.Long).Show();
-				}
+                ValidateServiceAndContinue(_scheduleService, () =>
+                {
+                    Toast.MakeText(this, message, ToastLength.Long).Show();
+                });
+
 				await SchedulesAvailables();
             };
 
@@ -106,12 +106,7 @@ namespace Haircut.Droid.Resources.Activitys
 
 			ab.Show();            
         }
-
-        protected async override void OnResume()
-        {
-            base.OnResume();            
-        }
-
+        
         private async Task SchedulesAvailables()
         {
             await MakeRequestAsync(async () =>

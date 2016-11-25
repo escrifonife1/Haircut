@@ -102,6 +102,11 @@ namespace Haircut.Core.Services
             return _errorMessage;
         }
 
+        public bool HasMessageError()
+        {
+            return !string.IsNullOrWhiteSpace(ErrorMessage());
+        }
+
         public void SetErrorMessage(string message)
         {
             _errorMessage = message;
