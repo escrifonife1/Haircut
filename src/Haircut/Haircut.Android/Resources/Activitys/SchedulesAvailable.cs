@@ -26,6 +26,7 @@ namespace Haircut.Droid.Resources.Activitys
         private List<Schedule> _schedulesAvailables;
         private ISchedulesService _scheduleService;
         Login _login;
+        private Spinner _spinner_barbershop, _spinner_hairdresser;
 
         protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -35,12 +36,33 @@ namespace Haircut.Droid.Resources.Activitys
 
             _listView_horariosDisponiveis = FindViewById<ListView>(Resource.Id.listViewHorarios);
             _listView_horariosDisponiveis.ItemClick += _horariosDisponiveis_ItemClick;
+            _spinner_barbershop = FindViewById<Spinner>(Resource.Id.spinner_barbershop);
+            _spinner_hairdresser = FindViewById<Spinner>(Resource.Id.spinner_haridresser);
+            _spinner_barbershop.Prompt = "Barbearia";
+            var barbershopAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Black White","Kbloo" });
+            barbershopAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            _spinner_barbershop.Adapter = barbershopAdapter;
+            _spinner_barbershop.ItemSelected += (s, e) =>
+            {
+                Spinner spinner = (Spinner)s;
 
-            _scheduleService = ManagerFactory.GetInstance<ISchedulesService>();
+                string toast = string.Format("The planet is {0}", spinner.GetItemAtPosition(e.Position));
+                Toast.MakeText(this, toast, ToastLength.Long).Show();
+                var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Phill", "John", "Mary" });
+                _spinner_hairdresser.Adapter = hairdresserAdapter;
+            };
+
+            _spinner_hairdresser.Prompt = "Cabelereiro(a)";
+            _spinner_hairdresser.ItemSelected += async (s, e) =>
+            {
+                await SchedulesAvailables();
+            };
+
+                _scheduleService = ManagerFactory.GetInstance<ISchedulesService>();
             _login = Settings.Local.Get<Login>("login");
         }
 
-        private async void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var schedule = _schedulesAvailables.ElementAt(e.Position);
 
@@ -87,8 +109,7 @@ namespace Haircut.Droid.Resources.Activitys
 
         protected async override void OnResume()
         {
-            base.OnResume();
-            await SchedulesAvailables();
+            base.OnResume();            
         }
 
         private async Task SchedulesAvailables()
