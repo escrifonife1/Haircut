@@ -13,11 +13,13 @@ namespace HaircutWebApi.Controllers
     {
         private IScheduleRepository _scheduleRepository;
         private ILoginRepository _loginRepository;
+        private IHairdresserRepository _hairdresserRepository;
 
-        public ScheduleController(IScheduleRepository scheduleRepository, ILoginRepository loginRepository)
+        public ScheduleController(IScheduleRepository scheduleRepository, ILoginRepository loginRepository, IHairdresserRepository hairdresserRepository)
         {
             _loginRepository = loginRepository;
             _scheduleRepository = scheduleRepository;
+            _hairdresserRepository = hairdresserRepository;
         }
 
         [HttpGet]
@@ -61,10 +63,12 @@ namespace HaircutWebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            var login = _loginRepository.GetById(7);
-            var lastSchedule = _scheduleRepository.GetFromDate(DateTime.Today.AddHours(8), login.Id).OrderBy(s => s.Date).LastOrDefault();
+            //var login = _loginRepository.GetById(7);
+            
+            var lastSchedule = _scheduleRepository.GetFromDate(DateTime.Today.AddHours(8), _loginRepository.GetByUserName("Admin").Id).OrderBy(s => s.Date).LastOrDefault();
 
-            var horarioInicial = lastSchedule?.Date.Date.AddDays(1) ?? DateTime.Today.AddHours(8);
+            var horarioInicial = lastSchedule?.Date.AddDays(1) ?? DateTime.Today.AddHours(8);
+            
             Schedule schedule;
             for (int i = 0; i < 23; i++)
             {
@@ -72,24 +76,15 @@ namespace HaircutWebApi.Controllers
                 {
                     Available = 1,
                     Date = horarioInicial,
-                    Login = new Login()
-                    {
-                        Id = 7,
-                        Name = "i",
-                        UserName = "i",
-                        Created = DateTime.Now,
-                        Password = "i",
-                        Phone = "3"
-                    }
+                    Login = _loginRepository.GetByUserName("Admin"),
+                    Hairdresser = _hairdresserRepository.GetById(1),
                 };
                                 
                 horarioInicial = horarioInicial.AddMinutes(30);
                 _scheduleRepository.Add(schedule);
                 _scheduleRepository.Save();
             }
-
             
-
             return Ok();
         }
     }

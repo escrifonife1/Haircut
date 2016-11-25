@@ -93,6 +93,7 @@ namespace HaircutWebApi.App_Start
             container.Register<DatabaseContext>(Lifestyle.Scoped);
             container.Register<ILoginRepository, LoginRepository>(Lifestyle.Scoped);
             container.Register<IScheduleRepository, ScheduleRepository>(Lifestyle.Scoped);
+            container.Register<IHairdresserRepository, HairdresserRepository>(Lifestyle.Scoped);
 
             // For instance:
             // container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Scoped);

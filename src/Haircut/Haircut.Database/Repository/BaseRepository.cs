@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Repository
 {
-    public class BaseRepository<T> : IBaseRepository<T>
+    public class BaseRepository<T> : IBaseRepository<T> 
     {
         protected DatabaseContext _context;
 

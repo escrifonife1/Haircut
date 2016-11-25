@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BarberShop.cs" />
+    <Compile Include="Models\Hairdresser.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

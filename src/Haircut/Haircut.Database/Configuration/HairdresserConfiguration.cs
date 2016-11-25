@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Configuration
 {
-    public class ScheduleConfiguration : EntityTypeConfiguration<Schedule>
+    public class HairdresserConfiguration : EntityTypeConfiguration<Hairdresser>
     {
-        public ScheduleConfiguration()
+        public HairdresserConfiguration()
         {
-            this.HasKey(s => s.Id);
-            this.Property(s => s.Date)
-                .IsRequired();
-            this.Property(s => s.Available)
+            this.HasKey(h => h.Id);
+            this.Property(b => b.Name)
+                .HasMaxLength(50)
                 .IsRequired();
         }
     }
