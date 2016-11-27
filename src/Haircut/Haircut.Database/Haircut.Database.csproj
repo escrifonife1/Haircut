@@ -52,6 +52,7 @@
     <Compile Include="Configuration\BarberShopConfiguration.cs" />
     <Compile Include="Configuration\HairdresserConfiguration.cs" />
     <Compile Include="Configuration\ScheduleConfiguration.cs" />
+    <Compile Include="Contract\IBarbershopRepository.cs" />
     <Compile Include="Contract\IBaseRepository.cs" />
     <Compile Include="Contract\IHairdresserRepository.cs" />
     <Compile Include="Contract\ILoginRepository.cs" />
@@ -85,8 +86,13 @@
     <Compile Include="Migrations\201611242245142_CreateTableHairdresser.Designer.cs">
       <DependentUpon>201611242245142_CreateTableHairdresser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611271841327_Changes1.cs" />
+    <Compile Include="Migrations\201611271841327_Changes1.Designer.cs">
+      <DependentUpon>201611271841327_Changes1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BarbershopRepository.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\DatabaseContext.cs" />
     <Compile Include="Repository\HairdresserRepository.cs" />
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611242245142_CreateTableHairdresser.resx">
       <DependentUpon>201611242245142_CreateTableHairdresser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611271841327_Changes1.resx">
+      <DependentUpon>201611271841327_Changes1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

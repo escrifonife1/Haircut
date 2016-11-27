@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Services
 {
-    public abstract class BaseService : IErrorMessages
+    public abstract class BaseService : IBaseService
     {
         string baseUrl = "http://tiagopascal-001-site1.gtempurl.com/HaircutApi/api/";
         protected RestClient _client;
@@ -25,7 +25,8 @@ namespace Haircut.Core.Services
         {
             var request = new RestRequest($"{resource}/{paramName}", Method.GET);
             //request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
-            request.AddUrlSegment($"{paramName}", data.ToString()); // replaces matching token in request.Resource
+            //var dataJson = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+            request.AddParameter($"{paramName}", data.ToString()); // replaces matching token in request.Resource
 
             // easily add HTTP Headers
             //request.AddHeader("header", "value");
@@ -39,9 +40,31 @@ namespace Haircut.Core.Services
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
-            var userResponse = await _client.ExecuteTaskAsync<TOut>(request);
-            var user = userResponse.Data;
-            return user;
+            var responseData = await _client.ExecuteTaskAsync<TOut>(request);
+            AddErrorMessageIfNeeded(responseData);
+            return responseData.Data;
+        }
+
+        public async Task<TOut> Get<TOut>(string resource)
+        {
+            var request = new RestRequest($"{resource}/", Method.GET);
+            //request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
+            
+            // easily add HTTP Headers
+            //request.AddHeader("header", "value");
+
+            // add files to upload (works with compatible verbs)
+            //request.AddFile(path);
+
+            // execute the request
+            /*IRestResponse response = _client.Execute(request);
+            var content = response.Content;*/ // raw content as string
+
+            // or automatically deserialize result
+            // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
+            var responseData = await _client.ExecuteTaskAsync<TOut>(request);
+            AddErrorMessageIfNeeded(responseData);
+            return responseData.Data;            
         }
 
         public async Task<T> FromRequestBody<T>(T data, string resource, Method method)

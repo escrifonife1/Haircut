@@ -30,6 +30,8 @@ namespace Haircut.Droid.Resources.Factory
 
             container.Register<ILoginService, LoginService>();
             container.Register<ISchedulesService, SchedulesService>();
+            container.Register<IHairdresserService, HairdresserService>();
+            container.Register<IBarbershoperService, BarbershopService>();
 
             container.Verify();            
         }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Repository
 {
-    public class HairdresserRepository : BaseRepository<Hairdresser>, IHairdresserRepository
+    public class BarbershopRepository : BaseRepository<BarberShop>, IBarbershopRepository
     {
-        public List<Hairdresser> GetAll(int barbershopId)
+        public List<BarberShop> GetAll()
         {
-            return _context.Hairdresser.Where(h => h.BarberShopId == barbershopId).ToList();
+            return _context.BarberShop.ToList();
         }
     }
 }

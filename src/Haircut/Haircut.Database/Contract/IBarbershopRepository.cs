@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Haircut.Database.Contract
 {
-    public interface IHairdresserRepository : IBaseRepository<Hairdresser>
+    public interface IBarbershopRepository : IBaseRepository<BarberShop>
     {
-        List<Hairdresser> GetAll(int barbershopId);
+        List<BarberShop> GetAll();
     }
 }

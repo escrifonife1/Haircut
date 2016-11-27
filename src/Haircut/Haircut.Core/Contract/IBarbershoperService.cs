@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Contract
 {
-    public interface ILoginService : IBaseService
+    public interface IBarbershoperService : IBaseService
     {
-        Task<Login> Log(Login login);
-        Task<Login> Register(Login login);
-        bool IsValideForRegister(Login login);        
+        Task<List<BarberShop>> Barbershopers();
     }
 }

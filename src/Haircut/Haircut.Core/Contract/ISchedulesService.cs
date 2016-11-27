@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Haircut.Core.Contract
 {
-    public interface ISchedulesService : IErrorMessages
+    public interface ISchedulesService : IBaseService
     {
         Task<List<Schedule>> Availables(DateTime from, int loginId);
         Task<Schedule> ScheduleByLogin(Login login);

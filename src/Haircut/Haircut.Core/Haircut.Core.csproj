@@ -48,11 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IBarbershoperService.cs" />
+    <Compile Include="Contract\IBaseService.cs" />
     <Compile Include="Contract\IErrorMessages.cs" />
+    <Compile Include="Contract\IHairdresserService.cs" />
     <Compile Include="Contract\ISchedulesService.cs" />
     <Compile Include="Contract\ILoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BarbershopService.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\HairdresserService.cs" />
     <Compile Include="Services\SchedulesService.cs" />
     <Compile Include="Services\LoginService.cs" />
   </ItemGroup>

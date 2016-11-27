@@ -19,9 +19,9 @@ namespace HaircutWebApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(int barbershopId)
         {
-            return Ok( _hairdresserRepository.GetAll() );
+            return Ok( _hairdresserRepository.GetAll(barbershopId) );
         }
     }
 }

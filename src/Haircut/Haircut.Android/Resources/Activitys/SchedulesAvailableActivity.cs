@@ -27,6 +27,10 @@ namespace Haircut.Droid.Resources.Activitys
         private ISchedulesService _scheduleService;
         Login _login;
         private Spinner _spinner_barbershop, _spinner_hairdresser;
+        private IBarbershoperService _barbershopService;
+        private IHairdresserService _hairdresserService;
+        private List<BarberShop> _barbershopers;
+        private List<Hairdresser> _hairdressers;
 
         protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -34,40 +38,66 @@ namespace Haircut.Droid.Resources.Activitys
 
             SetContentView(Resource.Layout.SchedulesAvailable);
 
+            _login = Settings.Local.Get<Login>("login");
+            _scheduleService = ManagerFactory.GetInstance<ISchedulesService>();            
+            _barbershopService = ManagerFactory.GetInstance<IBarbershoperService>();
+            _hairdresserService = ManagerFactory.GetInstance<IHairdresserService>();
+
             _listView_horariosDisponiveis = FindViewById<ListView>(Resource.Id.listViewHorarios);
             _listView_horariosDisponiveis.ItemClick += _horariosDisponiveis_ItemClick;
             _spinner_barbershop = FindViewById<Spinner>(Resource.Id.spinner_barbershop);
             _spinner_hairdresser = FindViewById<Spinner>(Resource.Id.spinner_haridresser);
             _spinner_barbershop.Prompt = "Barbearia";
-            var barbershopAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, new string[] { "Black White","Kbloo" });
             
-            _spinner_barbershop.Adapter = barbershopAdapter;
-            _spinner_barbershop.ItemSelected += _spinner_barbershop_ItemSelected;
-            
-
             _spinner_hairdresser.Prompt = "Cabelereiro(a)";
-            _spinner_hairdresser.ItemSelected += _spinner_hairdresser_ItemSelected;
-            
-                _scheduleService = ManagerFactory.GetInstance<ISchedulesService>();
-            _login = Settings.Local.Get<Login>("login");
+            _spinner_hairdresser.ItemSelected += _spinner_hairdresser_ItemSelected;            
+        }
+
+        protected async override void OnResume()
+        {
+            base.OnResume();
+            await MakeRequestAsync(async () =>
+            {
+                _barbershopers = await _barbershopService.Barbershopers();
+
+                ValidateServiceAndContinue(_barbershopService, () =>
+                {
+                    var barbershopAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, _barbershopers.Select(b => b.Name).ToArray());
+                    _spinner_barbershop.Adapter = barbershopAdapter;
+                    _spinner_barbershop.ItemSelected += _spinner_barbershop_ItemSelected;
+                });
+            });
         }
 
         private async void _spinner_hairdresser_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var spinner = (Spinner)sender;
-            var toast = string.Format("Cabelereiro {0}", spinner.GetItemAtPosition(e.Position));
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
-            await SchedulesAvailables();
+            await MakeRequestAsync(async () =>
+            {
+                var spinner = (Spinner)sender;
+                var toast = string.Format("Cabelereiro {0}", spinner.GetItemAtPosition(e.Position));
+                Toast.MakeText(this, toast, ToastLength.Long).Show();
+                await SchedulesAvailables();
+            });
         }
 
-        private void _spinner_barbershop_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private async void _spinner_barbershop_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            var spinner = (Spinner)sender;
+            await MakeRequestAsync(async () =>
+            {
+                var spinner = (Spinner)sender;
 
-            var toast = string.Format("Barbearia {0}", spinner.GetItemAtPosition(e.Position));
-            Toast.MakeText(this, toast, ToastLength.Long).Show();
-            var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Phill", "John", "Mary" });
-            _spinner_hairdresser.Adapter = hairdresserAdapter;
+                var toast = string.Format("Barbearia {0}", spinner.GetItemAtPosition(e.Position));
+                Toast.MakeText(this, toast, ToastLength.Long).Show();
+
+                var barbershop = _barbershopers.ElementAt(e.Position);
+
+                _hairdressers = await _hairdresserService.Hairdressers(barbershop);
+                ValidateServiceAndContinue(_hairdresserService, () =>
+                {
+                    var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, _hairdressers.Select(h => h.Name).ToList());
+                    _spinner_hairdresser.Adapter = hairdresserAdapter;
+                });
+            });
         }
 
         private void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

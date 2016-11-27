@@ -20,12 +20,15 @@ namespace Haircut.Database.Repository
         public DbSet<Login> Login { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Hairdresser> Hairdresser { get; set; }
+        public DbSet<BarberShop> BarberShop { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new LoginConfiguration());
             modelBuilder.Configurations.Add(new ScheduleConfiguration());
+            modelBuilder.Configurations.Add(new HairdresserConfiguration());
+            modelBuilder.Configurations.Add(new BarberShopConfiguration());
         }
 
     }
