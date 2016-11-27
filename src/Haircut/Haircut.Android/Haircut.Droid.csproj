@@ -114,6 +114,11 @@
     <AndroidResource Include="Resources\layout\SchedulesAvailable.axml" />
     <AndroidResource Include="Resources\drawable\haircut.png" />
     <AndroidResource Include="Resources\layout\Register.axml" />
+    <AndroidResource Include="Resources\drawable\lock.png" />
+    <AndroidResource Include="Resources\drawable\account.png" />
+    <AndroidResource Include="Resources\drawable\back_login.png" />
+    <AndroidResource Include="Resources\drawable\Barbershop.png" />
+    <AndroidResource Include="Resources\drawable\cellphone.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

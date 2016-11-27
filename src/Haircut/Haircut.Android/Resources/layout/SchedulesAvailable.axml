@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/barbershop">
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="2dp"
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText1"
         android:text="Horários disponíveis"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="#D5AA00" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

@@ -95,7 +95,7 @@ namespace Haircut.Droid.Resources.Activitys
                 _hairdressers = await _hairdresserService.Hairdressers(barbershop);
                 ValidateServiceAndContinue(_hairdresserService, () =>
                 {
-                    var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, _hairdressers.Select(h => h.Name).ToList());
+                    var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, _hairdressers.Select(h => h.Name).ToList());
                     _spinner_hairdresser.Adapter = hairdresserAdapter;
                 });
             });
