@@ -42,27 +42,32 @@ namespace Haircut.Droid.Resources.Activitys
             var barbershopAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, new string[] { "Black White","Kbloo" });
             
             _spinner_barbershop.Adapter = barbershopAdapter;
-            _spinner_barbershop.ItemSelected += (s, e) =>
-            {
-                var spinner = (Spinner)s;
-
-                var toast = string.Format("Barbearia {0}", spinner.GetItemAtPosition(e.Position));
-                Toast.MakeText(this, toast, ToastLength.Long).Show();
-                var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Phill", "John", "Mary" });
-                _spinner_hairdresser.Adapter = hairdresserAdapter;
-            };
+            _spinner_barbershop.ItemSelected += _spinner_barbershop_ItemSelected;
+            
 
             _spinner_hairdresser.Prompt = "Cabelereiro(a)";
-            _spinner_hairdresser.ItemSelected += async (s, e) =>
-            {
-                var spinner = (Spinner)s;
-                var toast = string.Format("Cabelereiro {0}", spinner.GetItemAtPosition(e.Position));
-                Toast.MakeText(this, toast, ToastLength.Long).Show();
-                await SchedulesAvailables();
-            };
-
+            _spinner_hairdresser.ItemSelected += _spinner_hairdresser_ItemSelected;
+            
                 _scheduleService = ManagerFactory.GetInstance<ISchedulesService>();
             _login = Settings.Local.Get<Login>("login");
+        }
+
+        private async void _spinner_hairdresser_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            var spinner = (Spinner)sender;
+            var toast = string.Format("Cabelereiro {0}", spinner.GetItemAtPosition(e.Position));
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
+            await SchedulesAvailables();
+        }
+
+        private void _spinner_barbershop_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            var spinner = (Spinner)sender;
+
+            var toast = string.Format("Barbearia {0}", spinner.GetItemAtPosition(e.Position));
+            Toast.MakeText(this, toast, ToastLength.Long).Show();
+            var hairdresserAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Phill", "John", "Mary" });
+            _spinner_hairdresser.Adapter = hairdresserAdapter;
         }
 
         private void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
