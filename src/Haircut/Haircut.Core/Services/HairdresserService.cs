@@ -12,7 +12,7 @@ namespace Haircut.Core.Services
     {
         public async Task<List<Hairdresser>> Hairdressers(BarberShop barbershop)
         {
-            return await Get<int, List<Hairdresser>>(barbershop.Id, "hairdresser", "barbershopId");
+            return await Get<int, List<Hairdresser>>(barbershop.Id, "hairdresser", "barbershopId");            
         }
     }
 }

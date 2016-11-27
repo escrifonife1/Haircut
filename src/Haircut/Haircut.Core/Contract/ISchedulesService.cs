@@ -9,7 +9,7 @@ namespace Haircut.Core.Contract
 {
     public interface ISchedulesService : IBaseService
     {
-        Task<List<Schedule>> Availables(DateTime from, int loginId);
+        Task<List<Schedule>> Availables(DateTime from, int loginId, int hairdresserId);
         Task<Schedule> ScheduleByLogin(Login login);
         Task Schedule(Schedule schedule);
     }

@@ -22,7 +22,7 @@ namespace Haircut.Droid.Resources.Activitys
 	[Activity(Label = "Horarios Disponiveis")]
 	public class SchedulesAvailableActivity : ActivityPermissionBase
 	{
-        private ListView _listView_horariosDisponiveis;
+        private ListView _listView_schedules_abailables;
         private List<Schedule> _schedulesAvailables;
         private ISchedulesService _scheduleService;
         Login _login;
@@ -43,8 +43,8 @@ namespace Haircut.Droid.Resources.Activitys
             _barbershopService = ManagerFactory.GetInstance<IBarbershoperService>();
             _hairdresserService = ManagerFactory.GetInstance<IHairdresserService>();
 
-            _listView_horariosDisponiveis = FindViewById<ListView>(Resource.Id.listViewHorarios);
-            _listView_horariosDisponiveis.ItemClick += _horariosDisponiveis_ItemClick;
+            _listView_schedules_abailables = FindViewById<ListView>(Resource.Id.listViewHorarios);
+            _listView_schedules_abailables.ItemClick += _listViewSchedules_availables_ItemClick;
             _spinner_barbershop = FindViewById<Spinner>(Resource.Id.spinner_barbershop);
             _spinner_hairdresser = FindViewById<Spinner>(Resource.Id.spinner_haridresser);
             _spinner_barbershop.Prompt = "Barbearia";
@@ -74,9 +74,10 @@ namespace Haircut.Droid.Resources.Activitys
             await MakeRequestAsync(async () =>
             {
                 var spinner = (Spinner)sender;
+                var hairdresser = _hairdressers.ElementAt(e.Position);
                 var toast = string.Format("Cabelereiro {0}", spinner.GetItemAtPosition(e.Position));
                 Toast.MakeText(this, toast, ToastLength.Long).Show();
-                await SchedulesAvailables();
+                await SchedulesAvailables(hairdresser.Id);
             });
         }
 
@@ -100,7 +101,7 @@ namespace Haircut.Droid.Resources.Activitys
             });
         }
 
-        private void _horariosDisponiveis_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void _listViewSchedules_availables_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var schedule = _schedulesAvailables.ElementAt(e.Position);
 
@@ -116,7 +117,8 @@ namespace Haircut.Droid.Resources.Activitys
                     Toast.MakeText(this, message, ToastLength.Long).Show();
                 });
 
-				await SchedulesAvailables();
+                var hairdresser = _hairdressers.ElementAt(_spinner_hairdresser.SelectedItemPosition);
+				await SchedulesAvailables(hairdresser.Id);
             };
 
             var ab = new AlertDialog.Builder(this);
@@ -142,11 +144,11 @@ namespace Haircut.Droid.Resources.Activitys
 			ab.Show();            
         }
         
-        private async Task SchedulesAvailables()
+        private async Task SchedulesAvailables(int hairdresserId)
         {
             await MakeRequestAsync(async () =>
             {
-                _schedulesAvailables = await _scheduleService.Availables(DateTime.Today.AddHours(-2), _login.Id);
+                _schedulesAvailables = await _scheduleService.Availables(DateTime.Today.AddHours(-2), _login.Id, hairdresserId);
                 var schedulesAvailables = _schedulesAvailables.Select(s =>
                 {
                     if (s.LoginId == _login.Id)
@@ -158,7 +160,7 @@ namespace Haircut.Droid.Resources.Activitys
                         return $"Disponível {s.Date.ToString("dd /MM/yyyy hh:mm")}";
                     }
                 }).ToArray();
-                _listView_horariosDisponiveis.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, schedulesAvailables);
+                _listView_schedules_abailables.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, schedulesAvailables);
             });
         }
     }

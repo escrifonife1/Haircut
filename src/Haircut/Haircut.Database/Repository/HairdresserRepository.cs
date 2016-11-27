@@ -12,7 +12,7 @@ namespace Haircut.Database.Repository
     {
         public List<Hairdresser> GetAll(int barbershopId)
         {
-            return _context.Hairdresser.Where(h => h.BarberShopId == barbershopId).ToList();
+            return _context.Hairdresser.Where(h => h.BarberShopId == barbershopId).OrderBy(h => h.Name).ToList();
         }
     }
 }

@@ -29,9 +29,9 @@ namespace HaircutWebApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(DateTime from, int loginId)
+        public IHttpActionResult Get(DateTime from, int loginId, int hairdresserId)
         {
-            return Ok(_scheduleRepository.GetFromDate(from, loginId));
+            return Ok(_scheduleRepository.GetFromDate(from, loginId, hairdresserId));
         }
 
         [HttpPut]
@@ -68,7 +68,7 @@ namespace HaircutWebApi.Controllers
         {
             //var login = _loginRepository.GetById(7);
             
-            var lastSchedule = _scheduleRepository.GetFromDate(DateTime.Today.AddHours(8), _loginRepository.GetByUserName("Admin").Id).OrderBy(s => s.Date).LastOrDefault();
+            var lastSchedule = _scheduleRepository.GetFromDate(DateTime.Today.AddHours(8), _loginRepository.GetByUserName("Admin").Id, 0).OrderBy(s => s.Date).LastOrDefault();
 
             var horarioInicial = lastSchedule?.Date.AddDays(1) ?? DateTime.Today.AddHours(8);
             

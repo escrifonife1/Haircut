@@ -15,9 +15,9 @@ namespace Haircut.Database.Repository
             return _context.Schedule.FirstOrDefault(s => s.Available == loginId);
         }
 
-        public List<Schedule> GetFromDate(DateTime from, int loginId)
+        public List<Schedule> GetFromDate(DateTime from, int loginId, int hairdresserId)
         {
-            return _context.Schedule.Where(s => s.Date >= from && (s.Available == 1 || s.Login.Id == loginId) ).ToList();
+            return _context.Schedule.Where(s => s.Date >= from && s.HairdresserId == hairdresserId && (s.Available == 1 || s.Login.Id == loginId) ).OrderBy(s => s.Date).ToList();
         }
     }
 }

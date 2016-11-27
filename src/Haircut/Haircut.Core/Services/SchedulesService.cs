@@ -11,12 +11,13 @@ namespace Haircut.Core.Services
 {
     public class SchedulesService : BaseService, ISchedulesService
     {
-        public async Task<List<Schedule>> Availables(DateTime from, int loginId)
+        public async Task<List<Schedule>> Availables(DateTime from, int loginId, int hairdresserId)
         {
             var request = new RestRequest("schedule/{from}", Method.GET);
             //var dataJson = Newtonsoft.Json.JsonConvert.SerializeObject(login);
             request.AddParameter("from", from.ToString()); // replaces matching token in request.Resource
             request.AddParameter("loginId", loginId); // replaces matching token in request.Resource
+            request.AddParameter("hairdresserId", hairdresserId); // replaces matching token in request.Resource
 
             var userResponse = await ExecuteTaskAsync<List<Schedule>>(request);            
             return userResponse.Data;           

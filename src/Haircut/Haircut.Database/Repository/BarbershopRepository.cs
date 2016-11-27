@@ -12,7 +12,7 @@ namespace Haircut.Database.Repository
     {
         public List<BarberShop> GetAll()
         {
-            return _context.BarberShop.ToList();
+            return _context.BarberShop.OrderBy(b => b.Name).ToList();
         }
     }
 }

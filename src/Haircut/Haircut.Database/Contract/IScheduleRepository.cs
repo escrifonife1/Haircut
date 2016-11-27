@@ -10,6 +10,6 @@ namespace Haircut.Database.Contract
     public interface IScheduleRepository : IBaseRepository<Schedule>
     {
         Schedule GetByLoginId(int userId);
-        List<Schedule> GetFromDate(DateTime from, int loginId);
+        List<Schedule> GetFromDate(DateTime from, int loginId, int hairdresserId);
     }
 }
