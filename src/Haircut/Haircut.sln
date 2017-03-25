@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaircutWebApi", "HaircutWebApi\HaircutWebApi.csproj", "{BA289DF1-778A-40A4-933F-6F99894F4782}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaircutWebApi.Tests", "HaircutWebApi.Tests\HaircutWebApi.Tests.csproj", "{01917CE9-C9C3-4160-BA42-47B1C2A3A473}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Haircut.Droid", "Haircut.Android\Haircut.Droid.csproj", "{4BA25AE1-EDA4-4691-8224-ED5272EDB9D4}"
 EndProject
@@ -73,38 +71,6 @@ Global
 		{BA289DF1-778A-40A4-933F-6F99894F4782}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{BA289DF1-778A-40A4-933F-6F99894F4782}.Release|x86.ActiveCfg = Release|Any CPU
 		{BA289DF1-778A-40A4-933F-6F99894F4782}.Release|x86.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|x86.ActiveCfg = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Ad-Hoc|x86.Build.0 = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|x86.ActiveCfg = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.AppStore|x86.Build.0 = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Debug|x86.Build.0 = Debug|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|iPhone.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|x86.ActiveCfg = Release|Any CPU
-		{01917CE9-C9C3-4160-BA42-47B1C2A3A473}.Release|x86.Build.0 = Release|Any CPU
 		{4BA25AE1-EDA4-4691-8224-ED5272EDB9D4}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA25AE1-EDA4-4691-8224-ED5272EDB9D4}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{4BA25AE1-EDA4-4691-8224-ED5272EDB9D4}.Ad-Hoc|Any CPU.Deploy.0 = Release|Any CPU
