@@ -1,5 +1,7 @@
 ﻿using Haircut.Core.Contract;
 using RestSharp;
+using RestSharp.Portable;
+using RestSharp.Portable.HttpClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +42,7 @@ namespace Haircut.Core.Services
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
-            var responseData = await _client.ExecuteTaskAsync<TOut>(request);
+            var responseData = await  _client.Execute<TOut>(request);
             AddErrorMessageIfNeeded(responseData);
             return responseData.Data;
         }
@@ -62,7 +64,7 @@ namespace Haircut.Core.Services
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
-            var responseData = await _client.ExecuteTaskAsync<TOut>(request);
+            var responseData = await _client.Execute<TOut>(request);
             AddErrorMessageIfNeeded(responseData);
             return responseData.Data;            
         }
@@ -108,14 +110,14 @@ namespace Haircut.Core.Services
 
         public async Task<IRestResponse<T>> ExecuteTaskAsync<T>(IRestRequest request, CancellationToken token)
         {
-            var response = await _client.ExecuteTaskAsync<T>(request, token);
+            var response = await _client.Execute<T>(request, token);
             AddErrorMessageIfNeeded(response);
             return response;
         }
 
         public async Task<IRestResponse<T>> ExecuteTaskAsync<T>(IRestRequest request)
         {
-            var response = await _client.ExecuteTaskAsync<T>(request);
+            var response = await _client.Execute<T>(request);
             AddErrorMessageIfNeeded(response);
             return response;
         }

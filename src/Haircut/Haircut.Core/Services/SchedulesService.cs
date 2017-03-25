@@ -1,6 +1,7 @@
 ﻿using Haircut.Core.Contract;
 using Haircut.Model.Models;
 using RestSharp;
+using RestSharp.Portable;
 using System;
 using System.Collections.Generic;
 using System.Linq;

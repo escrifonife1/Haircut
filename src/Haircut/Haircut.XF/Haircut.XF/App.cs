@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Haircut.Core.Contract;
+using Haircut.Droid.Resources.Factory;
+using Haircut.Model.Models;
+using Haircut.XF.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +15,28 @@ namespace Haircut.XF
     {
         public App()
         {
-            // The root page of your application
-            var content = new ContentPage
+            var loginPage = new LoginPage();
+            loginPage.ButtonLoginClick += async (userLogin, userPassword) =>
             {
-                Title = "Haircut.XF",
-                Content = new StackLayout
+                var loginService = ManagerFactory.GetInstance<ILoginService>();
+
+                var login = await loginService.Log(new Login()
                 {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
+                    UserName = userLogin.Text,
+                    Password = userPassword.Text
+                });
+
+                System.Diagnostics.Debug.WriteLine(login);
+
+                //ValidateServiceAndContinue(loginService, () =>
+                //{
+                //    Settings.Local.Set("login", login);
+
+                //    StartActivity(typeof(SchedulesAvailableActivity));
+                //});
             };
 
-            MainPage = new NavigationPage(content);
+            MainPage = new NavigationPage();
         }
 
         protected override void OnStart()

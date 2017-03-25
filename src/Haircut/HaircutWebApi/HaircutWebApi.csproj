@@ -323,16 +323,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Haircut.Core\Haircut.Core.csproj">
-      <Project>{864f05ee-ea50-4c33-9a7a-d27c6bf16da7}</Project>
-      <Name>Haircut.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Haircut.Database\Haircut.Database.csproj">
       <Project>{f646f4e2-879c-449d-9ce2-598515c07b58}</Project>
       <Name>Haircut.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Haircut.Model\Haircut.Model.csproj">
-      <Project>{8cc8fc8f-6f66-46e8-8755-4f91a1bfee4b}</Project>
+      <Project>{4e446e64-7d33-4d65-9156-d2ade891e98d}</Project>
       <Name>Haircut.Model</Name>
     </ProjectReference>
   </ItemGroup>

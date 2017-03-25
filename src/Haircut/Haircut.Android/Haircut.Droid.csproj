@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
@@ -134,14 +134,13 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Haircut.Core\Haircut.Core.csproj">
-      <Project>{864F05EE-EA50-4C33-9A7A-D27C6BF16DA7}</Project>
+      <Project>{0c44c4b6-57e5-4306-aee2-2edd0fcb9224}</Project>
       <Name>Haircut.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Haircut.Model\Haircut.Model.csproj">
-      <Project>{8cc8fc8f-6f66-46e8-8755-4f91a1bfee4b}</Project>
+      <Project>{4e446e64-7d33-4d65-9156-d2ade891e98d}</Project>
       <Name>Haircut.Model</Name>
     </ProjectReference>
   </ItemGroup>

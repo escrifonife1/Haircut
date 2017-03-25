@@ -25,6 +25,10 @@ namespace Haircut.Database.Repository
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Properties<string>()
+                .Configure(s => s.HasMaxLength(50));
+
             modelBuilder.Configurations.Add(new LoginConfiguration());
             modelBuilder.Configurations.Add(new ScheduleConfiguration());
             modelBuilder.Configurations.Add(new HairdresserConfiguration());

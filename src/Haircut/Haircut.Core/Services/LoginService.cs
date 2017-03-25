@@ -1,6 +1,7 @@
 ﻿using Haircut.Core.Contract;
 using Haircut.Model.Models;
 using RestSharp;
+using RestSharp.Portable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Haircut.Core.Services
             return lo;
         }
 
-        public Login Log1(Login login)
+        public async Task<Login> Log1(Login login)
         {
             var request = new RestRequest("login/{id}", Method.GET);
             //request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
@@ -72,7 +73,7 @@ namespace Haircut.Core.Services
 
             // or automatically deserialize result
             // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
-            var userResponse = _client.Execute<Login>(request);
+            var userResponse = await _client.Execute<Login>(request);
             var user = userResponse.Data;
             return user;
             //var name = user;
